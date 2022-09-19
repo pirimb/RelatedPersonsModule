@@ -1,0 +1,16 @@
+version: '3.3'
+services:
+  related-persons-test:
+    container_name: related-persons-test
+    ports:
+      - 8003:80
+    volumes:
+      - /var/log/related-persons-test:/app/log
+    environment:
+      - TZ=Asia/Tbilisi
+      - ASPNETCORE_ENVIRONMENT=Production
+    build:
+      context: .
+      dockerfile: RelatedPersonsModule/Dockerfile
+    network_mode: bridge
+    image: related-persons-test

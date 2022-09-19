@@ -1,0 +1,83 @@
+﻿@model MainDataViewModel
+@{
+    ViewData["Title"] = "Komitələr";
+}
+
+<body class="hold-transition sidebar-mini">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <form>
+                        <button type="button" class="m-4 btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            + Yeni komitə əlavə et
+                        </button>
+                        <div class="card-body ml-2" style="width:95%">
+                            <table style="table-layout:fixed; width:100%; font-size:80%" id="mainDataTable" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Ad</th>
+                                        <th class="text-center">Düzəliş et</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var m in Model.Committees)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@m.Name</td>
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-around align-items-center">
+                                                    <button type="submit" name="depId" value="@m.Id" asp-action="EditCommittee" asp-controller="Home" class="btn btn-sm btn-outline-success"><i class="fas fa-edit"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th class="text-center">Ad</th>
+                                        <th class="text-center">Düzəliş et</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="card card-success">
+                                                <div class="card-header myCardHeader">
+                                                    <b>Yeni komitənin əlavə edilməsi</b>
+                                                </div>
+                                                <div class="card-body">
+                                                    <input hidden asp-for="Committee.Id" />
+                                                    <div class="row pt-2">
+                                                        <div class="form-group-sm col-md-12 row">
+                                                            <label class="col-md-4">Komitənin adı</label>
+                                                            <input class="form-control form-control-sm col-md-8" asp-for="Committee.Name" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">İmtina</button>
+                                            <button type="submit" asp-action="NewCommittee" asp-controller="Home" class="btn btn-success">Əlavə et</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+    </script>
+</body>

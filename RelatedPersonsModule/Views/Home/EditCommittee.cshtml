@@ -1,0 +1,38 @@
+﻿@model MainDataViewModel
+@{
+
+}
+@{
+    ViewBag.Title = "Komitələr";
+    Layout = "_Layout";
+}
+
+
+<!--search -->
+<div class="container pt-5">
+    <form method="post" enctype="multipart/form-data" id="editForm" class="">
+        <div class="card card-success">
+            <div class="card-header myCardHeader">
+                <b>Komitə adında dəyişiklik</b>
+            </div>
+            <div class="card-body">
+                <input hidden value="@Model.Committee.Id" asp-for="Committee.Id" />
+                <div class="row pt-2">
+                    <div class="form-group-sm col-md-12 row">
+                        <label class="col-md-5">Komitənin adı</label>
+                        <input class="form-control form-control-sm col-md-7" asp-for="Committee.Name" value="@Model.Committee.Name" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <button type="submit" asp-action="EditCommittee" asp-controller="Home" class="btn btn-success float-end mt-4">Yadda saxla</button>
+            <a class="btn btn-primary float-end mt-4 mr-3" href="/Home/Departments" type="submit">Imtina</a>
+
+        </div>
+    </form>
+
+</div>
+<script>
+</script>

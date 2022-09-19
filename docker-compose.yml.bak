@@ -1,0 +1,18 @@
+version: '3.3'
+services:
+  moha:
+    container_name: moha
+    ports:
+      - 8700:80
+    volumes:
+      - /var/log/moha:/app/log
+    environment:
+      - TZ=Asia/Tbilisi
+      - ASPNETCORE_ENVIRONMENT=Production
+      - VIRTUAL_HOST=iis.rabitabank.com
+    #      - VIRTUAL_PATH=/exchange/
+    build:
+      context: .
+      dockerfile: moha/Dockerfile
+    network_mode: bridge
+    image: moha

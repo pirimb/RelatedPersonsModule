@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/lib/bootstrap/css/bootstrap-grid.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
+    <link rel="stylesheet" href="~/lib/admin-lte/css/adminlte.min.css" />
+    <link rel="stylesheet" href="~/lib/datatables/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link href="/rabita-logo.png" rel="icon" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+</head>
+<body class="sidebar-mini">
+    <header>
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a asp-action="Logout" asp-controller="Authentification" class="nav-link">
+                        <i class="fas  fa-sign-out"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <aside class="main-sidebar  sidebar-dark-primary elevation-4">
+        <a asp-action="Index" asp-controller="Home" class="brand-link">
+            <span class="brand-text font-weight-light ml-4">Aidiyyatı şəxslər</span>
+        </a>
+        <div class="sidebar">
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <li class="nav-item">
+                        <div href="pages/widgets.html" class="nav-link text-light">
+                            <i class="nav-icon fas fa-user"></i>
+                            <p class="text-light" id="username">Error User</p>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div href="pages/widgets.html" class="nav-link text-light">
+                            <i class="fa-solid fa-database"></i>
+                            <p class="text-light" id="database">Error DB</p>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a id="Home" asp-action="Index" asp-controller="Home" class="nav-link ">
+                            <i class="fa-solid fa-list"></i>
+                            <p>
+                                Aidiyyatı şəxslər
+                            </p>
+                        </a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a id="trnTypesBtn" asp-action="HeadOfDivisions" asp-controller="HeadOfDivision" class="nav-link">
+                            <i class="fa-solid fa-list"></i>
+                            <p>
+                                Şöbə müdirləri
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="trnTypesBtn" asp-action="Directors" asp-controller="Director" class="nav-link">
+                            <i class="fa-solid fa-list"></i>
+                            <p>
+                                Direktorlar
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="rulesBtn" asp-action="GeneralDirectors" asp-controller="GeneralDirector" class="nav-link">
+                            <i class="fa-solid fa-list"></i>
+                            Baş direktolar
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="Shareholder" asp-action="Shareholders" asp-controller="Shareholder" class="nav-link ">
+                            <i class="fa-solid fa-money-bill"></i>
+                            <p>
+                                Səhmdarlar
+                            </p>
+                        </a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a id="trnTypesBtn" asp-action="Audits" asp-controller="Audit" class="nav-link">
+                            <i class="fa-brands fa-audible"></i>
+                            <p>
+                                Audit
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="trnTypesBtn" asp-action="Supervisors" asp-controller="Supervisor" class="nav-link">
+                            <i class="fa-solid fa-eye"></i>
+                            <p>
+                                Müşahidə şurası
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="trnTypesBtn" asp-action="Committees" asp-controller="Home" class="nav-link">
+                            <i class="fa-solid fa-list"></i>
+                            <p>
+                                Komitələr
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="trnTypesBtn" asp-action="Departments" asp-controller="Home" class="nav-link">
+                            <i class="fa-solid fa-list"></i>
+                            <p>
+                                Departamentlər
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="trnTypesBtn" asp-action="Divisions" asp-controller="Home" class="nav-link">
+                            <i class="fa-solid fa-list"></i>
+                            <p>
+                                Şöbələr
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+
+
+    <div class="content-wrapper">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="footer text-muted" style="height:0">
+        <div class="container">
+            @*     &copy; 2022 - Constructor - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            *@
+        </div>
+    </footer>
+
+
+
+
+    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/font-awesome/js/all.min.js"></script>
+    <script src="~/lib/admin-lte/js/adminlte.min.js"></script>
+    <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+
+</body>
+</html>

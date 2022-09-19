@@ -1,0 +1,100 @@
+﻿@model MainDataViewModel
+@{
+
+}
+@{
+    ViewBag.Title = "Yeni baş direktor";
+    Layout = "_Layout";
+}
+
+
+<!--search -->
+<div class="container pt-5">
+    <form method="post" enctype="multipart/form-data" id="editForm" class="">
+        <div class="card card-success">
+            <div class="card-header myCardHeader">
+                <b>Baş direktor məlumatları</b>
+            </div>
+            <div class="card-body">
+                <input hidden asp-for="RelatedPerson.Id" />
+                <div class="row pt-2">
+                    <div class="form-group-sm col-md-6 row">
+                        <label class="col-md-5">Ad</label>
+                        <input id="relatedPerson_name" required class="form-control form-control-sm col-md-7" asp-for="RelatedPerson.Name" value="" />
+                    </div>
+                    <div class="form-group-sm col-md-6 row">
+                        <label class="col-md-5">Soyad</label>
+                        <input id="relatedPerson_surName" required class="form-control form-control-sm col-md-7" asp-for="RelatedPerson.SurName" value="" />
+                    </div>
+                </div>
+
+                <div class="row pt-2">
+                    <div class="form-group-sm-sm col-md-6 row">
+                        <label class="col-md-5">Ata adı</label>
+                        <input id="relatedPerson_Patron" required class="form-control form-control-sm col-md-7" asp-for="RelatedPerson.Patron" value="" />
+                    </div>
+                    <div class="form-group-sm-sm col-md-6 row">
+                        <label class="col-md-5">Pin kod</label>
+                        <input id="pin_code" required class="form-control form-control-sm col-md-7" asp-for="RelatedPerson.PinCode" value="" />
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row pt-2">
+                    <div class="form-group-sm col-md-6 row">
+                        <label required class="col-md-5">Qeydiyyat nömrəsi</label>
+                        <input id="relatedPerson_cif" class="form-control form-control-sm col-md-7" asp-for="RelatedPerson.Cif" />
+                    </div>
+                    <div class="form-group-sm col-md-6 row">
+                        <label class="col-md-5">Səhmdar</label>
+                        <select asp-for="RelatedPerson.IsShareholder" class="form-control form-control-sm col-md-7">
+                            <option value="0">Xeyr</option>
+                            <option value="1">Bəli</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row pt-2">
+                    <div class="form-group-sm col-md-6 row">
+                        <label class="col-md-5">Audit komitəsi üzvü</label>
+                        <select asp-for="RelatedPerson.IsAudit" class="form-control form-control-sm col-md-7">
+                            <option value="0">Xeyr</option>
+                            <option value="1">Bəli</option>
+                        </select>
+                    </div>
+                    <div class="form-group-sm col-md-6 row">
+                        <label class="col-md-5">Müşəhidə şurası</label>
+                        <select asp-for="RelatedPerson.IsSupervisory" class="form-control form-control-sm col-md-7">
+                            <option value="0">Xeyr</option>
+                            <option value="1">Bəli</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row pt-2">
+                    <div class="form-group-sm col-md-6 row">
+                        <label class="col-md-5">Departament</label>
+                        <select required  asp-for="states" multiple="multiple" class="js-example-basic-multiple form-control form-control-sm col-md-7">
+                            <option value="">--</option>
+                            @foreach (var item in Model.Departments)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div hidden class="form-group-sm col-md-6 row">
+                        <label class="col-md-5">Tutduğu vəzifə</label>
+                        <select asp-for="RelatedPerson.Position" class="form-control form-control-sm col-md-7">
+                            <option value="3">Baş direktor</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <button id="addNewRelatedPersonBtn" class="btn btn-success float-end mt-4" asp-action="NewGeneralDirector" asp-controller="GeneralDirector" type="submit">Yadda Saxla</button>
+        <a class="btn btn-primary float-end mt-4 mr-3" href="/GeneralDirector/GeneralDirectors" type="submit">Imtina</a>
+    </form>
+
+</div>
+<script>
+</script>

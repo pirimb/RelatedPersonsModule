@@ -1,0 +1,164 @@
+﻿@model MainDataViewModel
+@{
+    ViewData["Title"] = "Komitələr";
+}
+
+<body class="hold-transition sidebar-mini">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <form>
+                        <table style="table-layout:fixed; width:94%; font-size:80%" class="ml-4 mt-4 table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Ad</th>
+                                    <th scope="col">Soyad</th>
+                                    <th scope="col">Ata adı</th>
+                                    <th scope="col">Qeydiyyat nömrəsi</th>
+                                    <th scope="col">Pin kod</th>
+                                    <th scope="col">Sistəmə daxil edilmə tarixi</th>
+                                </tr>
+                            </thead>
+                            <input name="mainId" value="@Model.MainId" hidden asp-for="MainId" />
+                            <tbody>
+                                <tr>
+                                    <th>@Model.RelatedPerson.Name</th>
+                                    <td>@Model.RelatedPerson.SurName</td>
+                                    <td>@Model.RelatedPerson.Patron</td>
+                                    <td>@Model.RelatedPerson.Cif</td>
+                                    <td>@Model.RelatedPerson.PinCode</td>
+                                    <td>@Model.RelatedPerson.InsertDate</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <button type="button" class="ml-4 btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            + Komitə üzvlüyünü qed et
+                        </button>
+
+
+                        <div class="card-body ml-2" style="width:95%">
+                            <table style="table-layout:fixed; width:100%; font-size:80%" id="mainDataTable" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Komitə adı</th>
+                                        <th class="text-center">Üzvlüyü</th>
+                                        <th class="text-center">Düzəliş et /Sil</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <input name="mainId" value="@Model.MainId" hidden asp-for="MainId" />
+                                    @foreach (var m in Model.PersonCommittees)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@m.ComName</td>
+                                            @if (m.Position == 0)
+                                            {
+                                                <td class="text-center">Üzv</td>
+                                            }
+                                            else if (m.Position == 1)
+                                            {
+                                                <td class="text-center">Sədr</td>
+                                            }
+                                            else
+                                            {
+                                                <td class="text-center">Yoxdur</td>
+                                            }
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-center align-items-center">
+                                                    <button asp-controller="Home" asp-action="EditPersonCommittee" name="ComitteeId" type="submit" value="@(m.ComId)" class="mr-1 btn btn-sm btn-outline-success"><i class="fas fa-edit"></i></button>
+                                                    <button data-bs-toggle="modal" data-bs-target="#exampleModal_@(m.ComId)" type="button" class="ml-2 btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash"></i></button>
+                                                    @*<button asp-controller="Home" asp-action="DeletePersonCommittee" name="IdForDelete" type="submit" value="@(m.ComId)" class="ml-1 btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash"></i></button>*@
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <div class="modal fade" id="exampleModal_@(m.ComId)" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Diqqətlə oxuyun!</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <input name="mainId" value="@Model.MainId" hidden asp-for="MainId" />
+
+                                                    <div class="modal-body">
+                                                        @Model.RelatedPerson.Name @Model.RelatedPerson.SurName @m.ComName üzvlüyündən silməyə əminsiniz?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">İmtina</button>
+                                                        <button asp-controller="Home" asp-action="DeletePersonCommittee" name="IdForDelete" type="submit" value="@(m.ComId)" class="btn btn-danger">Sil</button>
+
+                                                        @*                                                        <button asp-controller="Home" asp-action="DeleteData" type="submit" name="IdForDelete" value="@m.ID" class="btn btn-danger">Sil</button>
+                                                        *@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th class="text-center">Komitə adı</th>
+                                        <th class="text-center">Üzvlüyü</th>
+                                        <th class="text-center">Düzəliş et /Sil</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </form>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true">
+                        <div class="modal-dialog modal-xl" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="post" enctype="multipart/form-data" id="editForm" class="">
+                                        <div class="card card-success">
+                                            <div class="card-header myCardHeader">
+                                                <b>Komitə üzvlüyü</b>
+                                            </div>
+                                            <input name="mainId" value="@Model.MainId" hidden asp-for="MainId" />
+                                            <div class="card-body">
+                                                <div class="row pt-2">
+                                                    <div class="form-group-sm col-md-6 row">
+                                                        <label class="col-md-5">Komitə</label>
+                                                        <select required asp-for="PersonCommittee.ComId" class="form-control form-control-sm col-md-7">
+                                                            <option value="">--</option>
+                                                            @foreach (var item in Model.Committees)
+                                                            {
+                                                                <option value="@item.Id">@item.Name</option>
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group-sm col-md-6 row">
+                                                        <label class="col-md-5">Qohumluq dərəcəsi</label>
+                                                        <select required asp-for="PersonCommittee.Position" class="form-control form-control-sm col-md-7">
+                                                            <option value="0">Üzv</option>
+                                                            <option value="1">Sədr</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Imtina</button>
+                                            <button type="submit" class="btn btn-success" asp-action="NewPersonCommittee" asp-controller="Home">Yadda Saxla</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+    </section>
+</body>

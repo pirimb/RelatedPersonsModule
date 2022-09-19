@@ -1,0 +1,61 @@
+﻿@model LoginModel;
+@{
+    ViewBag.Title = "Daxil ol";
+    Layout = null;
+}
+
+<head>
+    <title></title>
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/lib/bootstrap/css/bootstrap-grid.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
+    <link rel="stylesheet" href="~/lib/admin-lte/css/adminlte.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body class="d-flex justify-content-center hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo d-flex justify-content-center align-items-center">
+            <b style="font-family:'Monaco', monospace ">Aidiyyatı şəxslər</b>
+        </div>
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">İstifadəçi adı və şifrəni daxil edin</p>
+
+                <form asp-action="Login" method="post">
+                    <div class="input-group mb-3">
+                        <input asp-for="@Model.UserName" type="text" class="form-control" placeholder="Asbank username">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input asp-for="@Model.Password" type="password" class="form-control" placeholder="Password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <input style="display: none" />
+                    <div class="row">
+                        <div class="">
+                            <button type="submit" class="btn-green btn btn-success btn-block">Daxil Ol</button>
+                        </div>
+                    </div>
+                    @if (ViewBag.LoginMessage != null)
+                    {
+                        <span class="text-danger">@ViewBag.LoginMessage</span>
+                    }
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" charset="utf8" src="~/lib/admin-lte/js/adminlte.min.js" asp-append-version="true"></script>
+<script type="text/javascript" charset="utf8" src="~/lib/jquery/jquery.min.js" asp-append-version="true"></script>
+<script type="text/javascript" charset="utf8" src="~/lib/bootstrap/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
+<script type="text/javascript" charset="utf8" src="~/lib/font-awesome/js/all.min.js" asp-append-version="true"></script>
+<script type="text/javascript" charset="utf8" src="~/js/site.js" asp-append-version="true"></script>

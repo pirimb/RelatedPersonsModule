@@ -1,0 +1,119 @@
+﻿@model MainDataViewModel
+@{
+    ViewData["Title"] = "Ümumi məlumatlar";
+}
+
+<body class="hold-transition sidebar-mini">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <form>
+                        <div  style="width:95%;" class="d-flex justify-content-between">
+                            <button asp-controller="Home" asp-action="NewRelatedPerson" name="" type="submit" value="" class="m-4 btn btn-outline-success"><i class="fa-solid fa-plus"></i>    Yeni</button>
+                            <button asp-controller="Home" asp-action="Excel" name="" type="submit" value="" class="m-4 btn btn-outline-primary"><i class="fa-solid fa-download"></i>    Exel</button>
+                        </div>
+                        <div class="card-body ml-2" style="width:95%">
+                            <table style="table-layout:fixed; width:100%; font-size:80%" id="mainDataTable" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Ad</th>
+                                        <th class="text-center">Soyad</th>
+                                        <th class="text-center">Ata adı</th>
+                                        <th class="text-center">Qeydiyyat nömrəsi</th>
+                                        <th class="text-center">Pin kod</th>
+                                        <th class="text-center">Səhmdar</th>
+                                        <th class="text-center">Audit</th>
+                                        <th class="text-center">Müşahidə şurası</th>
+                                        <th class="text-center">Tutduğu vəzifə</th>
+                                        <th class="text-center">Sistəmə daxil edilmə tarixi</th>
+                                        <th class="text-center">Düzəliş tarixi</th>
+                                        <th class="text-center">Düzəliş et /Qohumlar /Komitələr</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var m in Model.RelatedPersons)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@m.Name</td>
+                                            <td class="text-center">@m.SurName</td>
+                                            <td class="text-center">@m.Patron</td>
+                                            <td class="text-center">@m.Cif</td>
+                                            <td class="text-center">@m.PinCode</td>
+                                            @if (m.IsShareholder == 1)
+                                            {
+                                                <td class="text-center">bəli</td>
+                                            }
+                                            else
+                                            {
+                                                <td class="text-center">xeyr</td>
+                                            }@if (m.IsAudit == 1)
+                                            {
+                                                <td class="text-center">bəli</td>
+                                            }
+                                            else
+                                            {
+                                                <td class="text-center">xeyr</td>
+                                            }@if (m.IsSupervisory == 1)
+                                            {
+                                                <td class="text-center">bəli</td>
+                                            }
+                                            else
+                                            {
+                                                <td class="text-center">xeyr</td>
+                                            }
+                                            @if (m.Position == 1)
+                                            {
+                                                <td class="text-center">Şöbə rəisi</td>
+                                            }
+                                            else if (m.Position == 2)
+                                            {
+                                                <td class="text-center">Direktor</td>
+                                            }
+                                            else if (m.Position == 3)
+                                            {
+                                                <td class="text-center">Baş direktor</td>
+                                            }
+                                            else
+                                            {
+                                                <td class="text-center">Yoxdur</td>
+                                            }
+                                            <td class="text-center">@m.InsertDate</td>
+                                            <td class="text-center">@m.UpdateDate</td>
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-around align-items-center">
+                                                    <button asp-controller="Home" asp-action="EditRelatedPerson" name="IdForEdit" type="submit" value="@(m.Id)" class="btn btn-sm btn-outline-success"><i class="fas fa-edit"></i></button>
+                                                    <button asp-controller="Home" asp-action="Relatives" name="IdForRelatives" type="submit" value="@(m.Id)" class="ml-1 mr-1 btn btn-sm btn-outline-info"><i class="fa-solid fa-people-group"></i></button>
+                                                    <button asp-controller="Home" asp-action="PersonCommittees" name="IdForCommittees" type="submit" value="@(m.Id)" class="btn btn-sm btn-outline-info"><i class="fa-solid fa-rectangle-list"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th class="text-center">Ad</th>
+                                        <th class="text-center">Soyad</th>
+                                        <th class="text-center">Ata adı</th>
+                                        <th class="text-center">Qeydiyyat nömrəsi</th>
+                                        <th class="text-center">Pin kod</th>
+                                        <th class="text-center">Səhmdar</th>
+                                        <th class="text-center">Audit</th>
+                                        <th class="text-center">Müşahidə şurası</th>
+                                        <th class="text-center">Tutduğu vəzifə</th>
+                                        <th class="text-center">Sistəmə daxil edilmə tarixi</th>
+                                        <th class="text-center">Düzəliş tarixi</th>
+                                        <th class="text-center">Düzəliş et /Qohumlar /Komitələr</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+    </script>
+</body>
